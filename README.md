@@ -10,8 +10,16 @@
 }
 ```
 
+For example: Grid pattern of 4 || 3 columns
+
+```scss
+.grid__**4** {
+	@include sushi__grid-pattern(**4**);
+}
+```
+
 #### Static Pattern
-(Dosn't no collapse at 'smart breakpoint')
+(Doesn't collapse at 'smart breakpoint')
 
 ```scss
 .grid__#--static {
@@ -19,23 +27,39 @@
 }
 ```
 
+For example: Grid pattern of 6 || 2 columns that doesn't collapse
+
+```scss
+.grid__6--**static** {
+	@include sushi__grid-pattern(6, **false**);
+}
+```
+
 #### Offset
 
 ```scss
-.grid__offset--# {
+.grid__#--offset {
 	@include sushi__grid-offset(#);
+}
+```
+
+For example: Grid offset of 4 || 3 columns of space to the left
+
+```scss
+.grid__4--**offset** {
+	@include sushi__**grid-offset**(4);
 }
 ```
 
 #### Cascading Grid Pattern
 
 ```scss
-.grid__#--query {
-	@include sushi__grid-pattern(#, true, $query);
+.grid__#--breakpoint {
+	@include sushi__grid-pattern(#, true, $breakpoint);
 }
 
-.grid__#--query--static {
-	@include sushi__grid-pattern(#, false, $query);
+.grid__#--breakpoint--static {
+	@include sushi__grid-pattern(#, false, $breakpoint);
 }
 ```
 
@@ -45,21 +69,21 @@ For example, to create a **4 then 3 then 2 column layout**, casacading at the pr
 ```scss
 $narrow: 480px;
 $medium: 720px;
-$wide: 1140px;
+$wide:   1140px;
 
-/* Grid pattern of 6 = 2 columns @ the narrow breakpoint */
-.grid__6--narrow--static {
-	@include sushi__grid-pattern(6, false, $narrow);
+/* Grid pattern of 6 || 2 columns @ the narrow breakpoint, that doesn't collapse */
+.grid__**6--narrow--static** {
+	@include sushi__grid-pattern(**6**, **false**, **$narrow**);
 }
 
-/* Grid pattern of 4 = 3 columns @ the medium breakpoint */
-.grid__4--medium {
-	@include sushi__grid-pattern(4, true, $medium);
+/* Grid pattern of 4 || 3 columns @ the medium breakpoint */
+.grid__**4--medium** {
+	@include sushi__grid-pattern(**4**, true, **$medium**);
 }
 
-/* Grid pattern of 3 = 4 columns @ the wide breakpoint */
-.grid__3--wide {
-	@include sushi__grid-pattern(3, true, $wide);
+/* Grid pattern of 3 || 4 columns @ the wide breakpoint */
+.grid__**3--wide** {
+	@include sushi__grid-pattern(**3**, true, **$wide**);
 }
 ```
 
