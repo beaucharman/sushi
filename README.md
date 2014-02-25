@@ -68,3 +68,7 @@ The HTML class would be (mobile first approach)
 ```
 column grid__6--narrow--static grid__4--medium grid__3--wide
 ```
+
+**Issues**
+
+https://github.com/beaucharman/sushi/issues
