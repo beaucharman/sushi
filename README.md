@@ -13,8 +13,8 @@
 For example: Grid pattern of 4 || 3 columns
 
 ```scss
-.grid__**4** {
-	@include sushi__grid-pattern(**4**);
+.grid__4 {
+	@include sushi__grid-pattern(4);
 }
 ```
 
@@ -30,8 +30,8 @@ For example: Grid pattern of 4 || 3 columns
 For example: Grid pattern of 6 || 2 columns that doesn't collapse
 
 ```scss
-.grid__6--**static** {
-	@include sushi__grid-pattern(6, **false**);
+.grid__6--static {
+	@include sushi__grid-pattern(6, false);
 }
 ```
 
@@ -46,8 +46,8 @@ For example: Grid pattern of 6 || 2 columns that doesn't collapse
 For example: Grid offset of 4 || 3 columns of space to the left
 
 ```scss
-.grid__4--**offset** {
-	@include sushi__**grid-offset**(4);
+.grid__4--offset {
+	@include sushi__grid-offset(4);
 }
 ```
 
@@ -72,18 +72,18 @@ $medium: 720px;
 $wide:   1140px;
 
 /* Grid pattern of 6 || 2 columns @ the narrow breakpoint, that doesn't collapse */
-.grid__**6--narrow--static** {
-	@include sushi__grid-pattern(**6**, **false**, **$narrow**);
+.grid__6--narrow--static {
+	@include sushi__grid-pattern(6, false, $narrow);
 }
 
 /* Grid pattern of 4 || 3 columns @ the medium breakpoint */
-.grid__**4--medium** {
-	@include sushi__grid-pattern(**4**, true, **$medium**);
+.grid__4--medium {
+	@include sushi__grid-pattern(4, true, $medium);
 }
 
 /* Grid pattern of 3 || 4 columns @ the wide breakpoint */
-.grid__**3--wide** {
-	@include sushi__grid-pattern(**3**, true, **$wide**);
+.grid__3--wide {
+	@include sushi__grid-pattern(3, true, $wide);
 }
 ```
 
