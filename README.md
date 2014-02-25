@@ -2,7 +2,7 @@
 > Tasty, bite sized, Sass grid system
 
 
-### Basic Grid Pattern
+#### Basic Grid Pattern
 
 ```scss
 .grid__# {
@@ -10,7 +10,8 @@
 }
 ```
 
-### Static Pattern (Dosn't no collapse at 'smart breakpoint')
+#### Static Pattern
+(Dosn't no collapse at 'smart breakpoint')
 
 ```scss
 .grid__#--static {
@@ -18,14 +19,15 @@
 }
 ```
 
-### Offset
+#### Offset
 
 ```scss
 .grid__offset--# {
 	@include sushi__grid-offset(#);
 }
+```
 
-### Cascading Grid Pattern
+#### Cascading Grid Pattern
 
 ```scss
 .grid__#--query {
@@ -37,7 +39,7 @@
 }
 ```
 
-For example, to create a 4 - 3 - 2 column layout, casacading at the predefined breakpoints respectivly:
+For example, to create a **4 then 3 then 2 column layout**, casacading at the predefined breakpoints respectivly:
 (All calculated in the default 12 column system)
 
 ```scss
@@ -46,12 +48,12 @@ $medium: 720px;
 $wide: 1140px;
 
 /* Grid pattern of 6 = 2 columns @ the narrow breakpoint */
-.grid__6--static {
+.grid__6--narrow--static {
 	@include sushi__grid-pattern(6, false, $narrow);
 }
 
 /* Grid pattern of 4 = 3 columns @ the medium breakpoint */
-.grid__4--query {
+.grid__4--medium {
 	@include sushi__grid-pattern(4, true, $medium);
 }
 
@@ -59,4 +61,10 @@ $wide: 1140px;
 .grid__3--wide {
 	@include sushi__grid-pattern(3, true, $wide);
 }
+```
+
+The HTML class would be (mobile first approach)
+
+```
+column grid__6--narrow--static grid__4--medium grid__3--wide
 ```
