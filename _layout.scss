@@ -1,0 +1,49 @@
+/**
+ * Examples
+ */
+@include sushi__breakpoint() {
+	.grid__1 {
+		@include sushi__grid-pattern(1, false);
+	}
+	.grid__2 {
+		@include sushi__grid-pattern(2, false);
+	}
+	.grid__3 {
+		@include sushi__grid-pattern(3, false);
+	}
+	.grid__4 {
+		@include sushi__grid-pattern(4, false);
+	}
+	.grid__5 {
+		@include sushi__grid-pattern(5, false);
+	}
+	.grid__6 {
+		@include sushi__grid-pattern(6, false);
+	}
+	.grid__7 {
+		@include sushi__grid-pattern(7, false);
+	}
+	.grid__8 {
+		@include sushi__grid-pattern(8, false);
+	}
+	.grid__9 {
+		@include sushi__grid-pattern(9, false);
+	}
+	.grid__10 {
+		@include sushi__grid-pattern(10, false);
+	}
+	.grid__11 {
+		@include sushi__grid-pattern(11, false);
+	}
+	.grid__12 {
+		@include sushi__grid-pattern(12, false);
+	}
+}
+
+.grid-content {
+	background-color: #ddd;
+	margin-bottom: 0.25em;
+	padding: 0.25em;
+	text-align: center;
+	box-shadow: inset 0 4px 4px -6px #222;
+}

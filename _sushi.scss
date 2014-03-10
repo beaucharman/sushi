@@ -15,16 +15,17 @@
 //
 //
 
-// Smart breakpoint
-$sushi__grid__float_breakpoint: 720px;
+$sushi__global__box_sizing:     true;
 
 // Grid settings
 $sushi__grid__column_padding:   0.75em;
-$sushi__base__padding:          $sushi__grid__column_padding;
 $sushi__grid__columns:          12;
 
+// Smart breakpoint - when to go single column
+$sushi__grid__float_breakpoint: 720px;
+
 // Max width of the gid
-$sushi__base__max_width:        960px;
+$sushi__base__max_width:        1140px;
 
 
 
@@ -67,7 +68,7 @@ $sushi__base__max_width:        960px;
 // @param {string} $point
 // @param {string} $condition
 //
-@mixin sushi__breakpoint($point: $grid__float_breakpoint, $condition: min-width) {
+@mixin sushi__breakpoint($point: $sushi__grid__float_breakpoint, $condition: min-width) {
 	@media screen and ($condition: $point) { @content; }
 }
 
@@ -96,10 +97,11 @@ $sushi__base__max_width:        960px;
 // @param none
 //
 @mixin sushi__row {
+	@extend %clearfix; // Then clear the floated columns
+
 	// Negative margin the row out to align the content of columns
 	margin-left: -$sushi__grid__column_padding;
 	margin-right: -$sushi__grid__column_padding;
-	@extend %clearfix; // Then clear the floated columns
 }
 
 //
@@ -113,7 +115,10 @@ $sushi__base__max_width:        960px;
 	min-height: 1px; // Prevent columns from collapsing when empty
 	padding-left: $sushi__grid__column_padding; // Set inner padding as gutters instead of margin
 	padding-right: $sushi__grid__column_padding;
-	@include sushi__box-sizing(); // Proper box-model (padding doesn't add to width)
+
+	@if ($sushi__global__box_sizing == false) {
+		@include sushi__box-sizing(); // Proper box-model (padding doesn't add to width)
+	}
 }
 
 //
@@ -122,35 +127,45 @@ $sushi__base__max_width:        960px;
 // @param {integer} $grid-pattern
 // @param {boolean} $collapse
 // @param {string}  $breakpoint
+// @param {integer} $layout
 //
-@mixin sushi__grid-pattern($grid-pattern, $collapse: true, $breakpoint: $sushi__grid__float_breakpoint) {
-
+@mixin sushi__grid-pattern($grid-pattern, $collapse: true, $breakpoint: $sushi__grid__float_breakpoint, $layout: $sushi__grid__columns) {
 	// Calculate width based on number of columns available
 	@if ($collapse == true) {
+
 		@include sushi__breakpoint($breakpoint) {
-			width: percentage($grid-pattern / $sushi__grid__columns);
+			width: percentage($grid-pattern / $layout);
 		}
 	} @else {
-		width: percentage($grid-pattern / $sushi__grid__columns);
+		width: percentage($grid-pattern / $layout);
 	}
 }
 
 //
 // Define Grid Offset
 //
-// @param  {integer} $grid-pattern
+// @param {integer} $grid-pattern
+// @param {integer} $layout
 //
-@mixin sushi__grid-offset($grid-pattern) {
-	@media (min-width: $sushi__grid__float_breakpoint) {
-		margin-left: percentage($grid-pattern / $sushi__grid__columns);
+@mixin sushi__grid-offset($grid-pattern, $collapse: true, $breakpoint: $grid__float_breakpoint, $layout: $sushi__grid__columns) {
+
+	@if ($collapse == true) {
+
+		@include breakpoint($breakpoint) {
+			margin-left: percentage($columns / $layout);
+		}
+	} @else {
+		margin-left: percentage($columns / $layout);
 	}
 }
 
 /**
  * Proper box sizing
  */
-* {
-	@include sushi__box-sizing();
+@if ($sushi__global__box_sizing == true) {
+	* {
+		@include sushi__box-sizing();
+	}
 }
 
 /**
@@ -159,7 +174,7 @@ $sushi__base__max_width:        960px;
 .sushi__container,
 .container {
 	margin: 0 auto;
-	padding: $sushi__base__padding;
+	padding: $sushi__grid__column_padding;
 	max-width: $sushi__base__max_width;
 }
 
@@ -168,6 +183,7 @@ $sushi__base__max_width:        960px;
  */
 .sushi__row,
 .row {
+
 	@include sushi__row;
 }
 
@@ -176,56 +192,6 @@ $sushi__base__max_width:        960px;
  */
 .sushi__column,
 .column {
+
 	@include sushi__column;
-}
-
-
-
-/**
- * Examples
- */
-.grid--1 {
-	@include sushi__grid-pattern(1);
-}
-.grid--2 {
-	@include sushi__grid-pattern(2);
-}
-.grid--3 {
-	@include sushi__grid-pattern(3);
-}
-.grid--4 {
-	@include sushi__grid-pattern(4);
-}
-.grid--5 {
-	@include sushi__grid-pattern(5);
-}
-.grid--6 {
-	@include sushi__grid-pattern(6);
-}
-.grid--7 {
-	@include sushi__grid-pattern(7);
-}
-.grid--8 {
-	@include sushi__grid-pattern(8);
-}
-.grid--9 {
-	@include sushi__grid-pattern(9);
-}
-.grid--10 {
-	@include sushi__grid-pattern(10);
-}
-.grid--11 {
-	@include sushi__grid-pattern(11);
-}
-.grid--12 {
-	@include sushi__grid-pattern(12);
-}
-
-
-.grid-content {
-	background-color: #ddd;
-	margin-bottom: 0.25em;
-	padding: 0.25em;
-	text-align: center;
-	box-shadow: inset 0 4px 4px -6px #222;
 }
