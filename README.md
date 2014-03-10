@@ -2,6 +2,9 @@
 > Tasty, bite sized, Sass grid system
 
 
+http://beaucharman.github.io/sushi/
+
+
 #### Basic Grid Pattern
 
 ```scss
