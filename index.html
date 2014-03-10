@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sushi by beaucharman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Sushi</h1>
+        <p>Tasty, bite sized, Sass grid system</p>
+
+        <p class="view"><a href="https://github.com/beaucharman/sushi">View the Project on GitHub <small>beaucharman/sushi</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/beaucharman/sushi/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/beaucharman/sushi/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/beaucharman/sushi">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="sushi" class="anchor" href="#sushi"><span class="octicon octicon-link"></span></a>Sushi</h1>
+
+<blockquote>
+<p>Tasty, bite sized, Sass grid system</p>
+</blockquote>
+
+<h4>
+<a name="basic-grid-pattern" class="anchor" href="#basic-grid-pattern"><span class="octicon octicon-link"></span></a>Basic Grid Pattern</h4>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__</span><span class="nn">#</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="err">#</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For example: Grid pattern of 4 || 3 columns</p>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__4</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="static-pattern" class="anchor" href="#static-pattern"><span class="octicon octicon-link"></span></a>Static Pattern</h4>
+
+<p>(Doesn't collapse at 'smart breakpoint')</p>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__</span><span class="nn">#--static</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="err">#</span><span class="o">,</span> <span class="n-Pseudo">false</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For example: Grid pattern of 6 || 2 columns that doesn't collapse</p>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__6--static</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="mi">6</span><span class="o">,</span> <span class="n-Pseudo">false</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="offset" class="anchor" href="#offset"><span class="octicon octicon-link"></span></a>Offset</h4>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__</span><span class="nn">#--offset</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-offset</span><span class="p">(</span><span class="err">#</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For example: Grid offset of 4 || 3 columns of space to the left</p>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__4--offset</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-offset</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="cascading-grid-pattern" class="anchor" href="#cascading-grid-pattern"><span class="octicon octicon-link"></span></a>Cascading Grid Pattern</h4>
+
+<div class="highlight highlight-scss"><pre><span class="nc">.grid__</span><span class="nn">#--breakpoint</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="err">#</span><span class="o">,</span> <span class="n-Pseudo">true</span><span class="o">,</span> <span class="nv">$breakpoint</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nc">.grid__</span><span class="nn">#--breakpoint--static</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="err">#</span><span class="o">,</span> <span class="n-Pseudo">false</span><span class="o">,</span> <span class="nv">$breakpoint</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For example, to create a <strong>4 then 3 then 2 column layout</strong>, casacading at the predefined breakpoints respectivly:
+(All calculated in the default 12 column system)</p>
+
+<div class="highlight highlight-scss"><pre><span class="nv">$narrow</span><span class="o">:</span> <span class="mi">480</span><span class="kt">px</span><span class="p">;</span>
+<span class="nv">$medium</span><span class="o">:</span> <span class="mi">720</span><span class="kt">px</span><span class="p">;</span>
+<span class="nv">$wide</span><span class="o">:</span>   <span class="mi">1140</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="cm">/* Grid pattern of 6 || 2 columns @ the narrow breakpoint, that doesn't collapse */</span>
+<span class="nc">.grid__6--narrow--static</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="mi">6</span><span class="o">,</span> <span class="n-Pseudo">false</span><span class="o">,</span> <span class="nv">$narrow</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Grid pattern of 4 || 3 columns @ the medium breakpoint */</span>
+<span class="nc">.grid__4--medium</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="mi">4</span><span class="o">,</span> <span class="n-Pseudo">true</span><span class="o">,</span> <span class="nv">$medium</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Grid pattern of 3 || 4 columns @ the wide breakpoint */</span>
+<span class="nc">.grid__3--wide</span> <span class="p">{</span>
+    <span class="k">@include</span><span class="nd"> sushi__grid-pattern</span><span class="p">(</span><span class="mi">3</span><span class="o">,</span> <span class="n-Pseudo">true</span><span class="o">,</span> <span class="nv">$wide</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>The HTML class would be (mobile first approach)</p>
+
+<pre><code>column grid__6--narrow--static grid__4--medium grid__3--wide
+</code></pre>
+
+<p><strong>Issues</strong></p>
+
+<p><a href="https://github.com/beaucharman/sushi/issues">https://github.com/beaucharman/sushi/issues</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/beaucharman">beaucharman</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
