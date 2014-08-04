@@ -22,7 +22,7 @@ $sushi__grid__column_padding:   0.75em;
 $sushi__grid__columns:          12;
 
 // Smart breakpoint - when to go single column
-$sushi__grid__float_breakpoint: 720px;
+$sushi__grid__float_breakpoint: 680px;
 
 // Max width of the gid
 $sushi__base__max_width:        1140px;
@@ -97,7 +97,7 @@ $sushi__base__max_width:        1140px;
 // @param none
 //
 @mixin sushi__row {
-	@extend %clearfix; // Then clear the floated columns
+	@extend %clearfix; // Clear the floated columns
 
 	// Negative margin the row out to align the content of columns
 	margin-left: -$sushi__grid__column_padding;
@@ -129,9 +129,9 @@ $sushi__base__max_width:        1140px;
 // @param {string}  $breakpoint
 // @param {integer} $layout
 //
-@mixin sushi__grid-pattern($grid-pattern, $collapse: true, $breakpoint: $sushi__grid__float_breakpoint, $layout: $sushi__grid__columns) {
+@mixin sushi__grid-pattern($grid-pattern, $auto_collapse: false, $breakpoint: $sushi__grid__float_breakpoint, $layout: $sushi__grid__columns) {
 	// Calculate width based on number of columns available
-	@if ($collapse == true) {
+	@if ($auto_collapse == true) {
 
 		@include sushi__breakpoint($breakpoint) {
 			width: percentage($grid-pattern / $layout);
@@ -147,15 +147,27 @@ $sushi__base__max_width:        1140px;
 // @param {integer} $grid-pattern
 // @param {integer} $layout
 //
-@mixin sushi__grid-offset($grid-pattern, $collapse: true, $breakpoint: $grid__float_breakpoint, $layout: $sushi__grid__columns) {
+@mixin sushi__grid-offset($grid_pattern, $collapse: true, $breakpoint: $sushi__grid__float_breakpoint, $layout: $sushi__grid__columns) {
+
+	@if ($collapse == true) {
+
+		@include sushi__breakpoint($breakpoint) {
+			margin-left: percentage($grid_pattern / $layout);
+		}
+	} @else {
+		margin-left: percentage($grid_pattern / $layout);
+	}
+}
+
+@mixin sushi__column-offset-reverse($grid_pattern, $collapse: true, $breakpoint: $grid__float_breakpoint, $layout: $sushi__grid__columns) {
 
 	@if ($collapse == true) {
 
 		@include breakpoint($breakpoint) {
-			margin-left: percentage($columns / $layout);
+			margin-right: percentage($grid_pattern / $layout);
 		}
 	} @else {
-		margin-left: percentage($columns / $layout);
+		margin-right: percentage($grid_pattern / $layout);
 	}
 }
 
@@ -178,6 +190,11 @@ $sushi__base__max_width:        1140px;
 	max-width: $sushi__base__max_width;
 }
 
+.container--flush {
+	padding-right: 0;
+	padding-left: 0;
+}
+
 /**
  * Rows
  */
@@ -187,11 +204,47 @@ $sushi__base__max_width:        1140px;
 	@include sushi__row;
 }
 
+.row__flush {
+	margin-left: 0;
+	margin-right: 0;
+}
+
 /**
  * Column
  */
 .sushi__column,
 .column {
 
+	-webkit-transition: width 0.4s;
+			transition: width 0.4s;
+
 	@include sushi__column;
+
+	/* Keep semeantic markup but flip the visual order of columns */
+	.row__reverse & {
+	  float: right;
+	}
+
+	/* ... and flip back any child columns */
+	.row__normal & {
+	  float: left;
+	}
+
+	.row__flush & {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
+
+
+
+/**
+ * Nice stacking styles
+ */
+
+.column--vertical-space {
+
+	margin-bottom: $sushi__grid__column_padding;
+}
+
+

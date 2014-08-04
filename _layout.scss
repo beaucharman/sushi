@@ -1,49 +1,133 @@
 /**
  * Examples
  */
-@include sushi__breakpoint() {
+ .grid-content {
+
+ 	@extend %clearfix;
+
+ 	background-color: #ddd;
+ 	margin-bottom: 0.125em;
+ 	margin-top: 0.125em;
+ 	padding: 0.5em 0.25em 0.5em 0.25em;
+ 	text-align: center;
+ 	box-shadow: inset 0 0px 1px 1px #218;
+
+ 	//border: 1px solid #888;
+ }
+
+/**
+ * Basic Grid Pattern - with smart collapse
+ */
+ @include sushi__breakpoint() {
+
 	.grid__1 {
-		@include sushi__grid-pattern(1, false);
+		@include sushi__grid-pattern(1);
 	}
 	.grid__2 {
-		@include sushi__grid-pattern(2, false);
+		@include sushi__grid-pattern(2);
 	}
 	.grid__3 {
-		@include sushi__grid-pattern(3, false);
+		@include sushi__grid-pattern(3);
 	}
 	.grid__4 {
-		@include sushi__grid-pattern(4, false);
+		@include sushi__grid-pattern(4);
 	}
 	.grid__5 {
-		@include sushi__grid-pattern(5, false);
+		@include sushi__grid-pattern(5);
 	}
 	.grid__6 {
-		@include sushi__grid-pattern(6, false);
+		@include sushi__grid-pattern(6);
 	}
 	.grid__7 {
-		@include sushi__grid-pattern(7, false);
+		@include sushi__grid-pattern(7);
 	}
 	.grid__8 {
-		@include sushi__grid-pattern(8, false);
+		@include sushi__grid-pattern(8);
 	}
 	.grid__9 {
-		@include sushi__grid-pattern(9, false);
+		@include sushi__grid-pattern(9);
 	}
 	.grid__10 {
-		@include sushi__grid-pattern(10, false);
+		@include sushi__grid-pattern(10);
 	}
 	.grid__11 {
-		@include sushi__grid-pattern(11, false);
+		@include sushi__grid-pattern(11);
 	}
 	.grid__12 {
-		@include sushi__grid-pattern(12, false);
+		@include sushi__grid-pattern(12);
 	}
 }
 
-.grid-content {
-	background-color: #ddd;
-	margin-bottom: 0.25em;
-	padding: 0.25em;
-	text-align: center;
-	box-shadow: inset 0 4px 4px -6px #222;
+/**
+ *
+ * Static Pattern
+ *
+ */
+
+ /*.column*/.grid__6--static {
+    @include sushi__grid-pattern(6);
 }
+
+/**
+ *
+ * Offeset
+ *
+ */
+/*.column*/.grid_offset__2 {
+	@include sushi__grid-offset(2);
+}
+
+ /**
+  *
+  * Reverse Offset
+  *
+  */
+
+/**
+ *
+ *	Cascading Grids
+ *
+ */
+
+/* Narrow */
+
+/*.row*/.grid__row__6--narrow .column {
+	@include sushi__grid-pattern(6);
+}
+
+/* Medium */
+@include sushi__breakpoint(600px) {
+
+	/*.row*/.grid__row__4--medium .column {
+		@include sushi__grid-pattern(4);
+	}
+}
+
+/* Wide */
+@include sushi__breakpoint(1000px) {
+
+	/*.row*/.grid__row__3--wide .column  {
+		@include sushi__grid-pattern(3);
+	}
+}
+
+ /**
+  *
+  * Alternate Grids
+  *
+  */
+
+ /**
+  * 2 fifths and 1 fifth examples of a 20 column grid system
+  */
+/*.column*/.grid__one-fifth {
+
+	@include sushi__grid-pattern(4, true, $sushi__grid__float_breakpoint, 20);
+}
+
+/*.column*/.grid__two-fifths {
+
+	@include sushi__grid-pattern(8, true, $sushi__grid__float_breakpoint, 20);
+}
+
+
